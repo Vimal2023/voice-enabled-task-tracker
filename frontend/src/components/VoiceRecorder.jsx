@@ -21,7 +21,7 @@ export function VoiceRecorder({ onResult, disabled }) {
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
       setRecording(false);
-      onResult(transcript);            // 🔥 callback to parent
+      onResult(transcript);       
     };
 
     recognition.onerror = () => setRecording(false);

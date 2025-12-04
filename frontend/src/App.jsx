@@ -24,9 +24,7 @@ export default function App() {
   const [editingTask, setEditingTask] = useState(null);
   const [prefillData, setPrefillData] = useState(null);
 
-  // ===========================
-  // LOAD TASKS
-  // ===========================
+
   const loadTasks = async () => {
     try {
       setLoading(true);
@@ -41,18 +39,13 @@ export default function App() {
     loadTasks();
   }, []);
 
-  // ===========================
-  // EDIT CLICK HANDLER (FIX)
-  // ===========================
+ 
   const handleEditClick = (task) => {
     setEditingTask(task);
     setPrefillData(null);
     setShowForm(true);
   };
 
-  // ===========================
-  // FORM SUBMIT (CREATE/UPDATE)
-  // ===========================
   const handleFormSubmit = async (payload) => {
     try {
       if (editingTask) {
@@ -73,17 +66,12 @@ export default function App() {
     }
   };
 
-  // ===========================
-  // DELETE TASK
-  // ===========================
   const handleDelete = async (task) => {
     await deleteTask(task._id);
     setTasks((prev) => prev.filter((t) => t._id !== task._id));
   };
 
-  // ===========================
-  // VOICE INPUT → PARSE → PREFILL
-  // ===========================
+
   const handleVoiceResult = async (transcript) => {
     const { parsed } = await parseTranscript(transcript);
     setEditingTask(null);
@@ -91,15 +79,11 @@ export default function App() {
     setShowForm(true);
   };
 
-  // WHICH DATA TO PREFILL?
   const filteredFormData = useMemo(() => {
     if (editingTask) return editingTask;
     return prefillData;
   }, [editingTask, prefillData]);
 
-  // ===========================
-  // DRAG & DROP LOGIC
-  // ===========================
   const handleDragStart = (event, taskId) => {
     event.dataTransfer.setData("taskId", taskId);
   };
@@ -122,9 +106,6 @@ export default function App() {
     );
   };
 
-  // ===========================
-  // TASK CARD
-  // ===========================
   const renderTaskCard = (task) => (
     <div
       key={task._id}
@@ -166,9 +147,6 @@ export default function App() {
     </div>
   );
 
-  // ===========================
-  // BOARD VIEW (KANBAN)
-  // ===========================
   const renderBoard = () => (
     <div className="board">
       {STATUS_COLUMNS.map((col) => (
