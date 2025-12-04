@@ -1,5 +1,5 @@
 import express from "express";
-import chrono from "chrono-node";
+import * as chrono from "chrono-node";
 
 const router = express.Router();
 
@@ -44,22 +44,29 @@ function extractDueDate(transcript) {
 // extract title
 function extractTitle(transcript) {
   let text = transcript
-    .replace(/(create|make|task|remind me to|please|add|schedule|set up)/gi, "")
+    .replace(
+      /(create|make|task|remind me to|please|add|schedule|set up|make a|do a)/gi,
+      ""
+    )
     .trim();
+
+  // Capitalize
   text = text.charAt(0).toUpperCase() + text.slice(1);
+
   return text.length > 3 ? text : "New Task";
 }
 
 router.post("/", async (req, res) => {
   try {
     const { transcript } = req.body;
+
     if (!transcript || typeof transcript !== "string") {
       return res.status(400).json({ error: "Transcript is required" });
     }
 
     const parsed = {
       title: extractTitle(transcript),
-      description: transcript, // full transcript as context
+      description: transcript, // full transcript stored for context
       priority: extractPriority(transcript),
       status: extractStatus(transcript),
       dueDate: extractDueDate(transcript),
