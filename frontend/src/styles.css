@@ -1,0 +1,267 @@
+/* Global Reset */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  background: radial-gradient(circle at top, #0d0f1e, #05060d);
+  color: #e8e9ef;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-shell {
+  min-height: 100vh;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.subtitle { color: #9aa0b4; margin-top: 6px; }
+
+/* Buttons */
+.btn {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.25s;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #6d55ff, #9f4fff);
+  color: white;
+  box-shadow: 0 4px 14px rgba(122, 77, 255, 0.35);
+}
+.btn-primary:hover { transform: translateY(-2px); opacity: 0.95; }
+
+.btn-secondary {
+  background: rgba(255,255,255,0.05);
+  color: #d3d4db;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.10); }
+
+.btn-light {
+  background: rgba(255,255,255,0.08);
+  color: #eaeaff;
+}
+.btn-light:hover { background: rgba(255,255,255,0.14); }
+
+.btn-danger {
+  background: #e34747;
+  color: #ffe5e5;
+}
+.btn-danger:hover { opacity: 0.92; }
+
+.btn-selected {
+  outline: 2px solid #7f5dff;
+}
+
+/* Dashboard (Kanban) */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.board-column {
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+}
+.board-column:hover {
+  border-color: rgba(255,255,255,0.18);
+  transform: translateY(-2px);
+}
+
+.board-column-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.board-column-header h3 { margin: 0; }
+.column-count { color: #8e93a6; font-size: 0.8rem; }
+
+/* Task Card */
+.task-card {
+  background: rgba(14,16,32,0.65);
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  cursor: grab;
+  transition: 0.25s;
+}
+.task-card:hover { transform: translateY(-2px); }
+.task-card:active { cursor: grabbing; }
+
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.task-title { font-weight: 600; letter-spacing: 0.2px; }
+.task-description { font-size: 0.85rem; color: #adb1c3; margin-top: 6px; }
+.task-meta { font-size: 0.78rem; color: #8a8f9e; margin-top: 8px; }
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* Priority Tag */
+.pill {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.pill-low { background: rgba(40, 170, 90, 0.2); color: #b8ffda; }
+.pill-medium { background: rgba(59,130,246,0.25); color: #bcd7ff; }
+.pill-high { background: rgba(249,151,0,0.33); color: #ffe1b3; }
+.pill-critical { background: rgba(255,53,60,0.25); color: #ffd0d0; }
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 7, 20, 0.65);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+}
+.modal {
+  width: 100%;
+  max-width: 520px;
+  background: rgba(15,18,35,0.9);
+  border-radius: 22px;
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+}
+
+/* Inputs */
+input, select, textarea {
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #e8e9ef;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: #8256ff;
+  outline: none;
+  background: rgba(255,255,255,0.07);
+}
+
+/* Media */
+@media (max-width: 900px) {
+  .board { grid-template-columns: 1fr; }
+  .app-shell { padding: 20px 14px; }
+}
+
+/* Better spacing layout improvements */
+.app-header {
+  margin-bottom: 40px;
+}
+
+.board-column {
+  padding: 22px;
+  margin-bottom: 18px;
+}
+
+.task-card {
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.task-actions {
+  margin-top: 16px;
+}
+
+.task-meta {
+  margin-top: 10px;
+}
+
+/* Modal spacing */
+.modal {
+  padding: 36px 32px;
+}
+
+.task-form {
+  gap: 18px;
+}
+
+.field-row {
+  gap: 16px;
+}
+
+.form-actions {
+  margin-top: 16px;
+  gap: 14px;
+}
+
+/* Section spacing */
+.content {
+  margin-top: 28px;
+}
+
+.board {
+  gap: 24px;
+}
+
+
+.task-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 24px;
+}
+
+.field.full {
+  grid-column: span 2;
+}
+
+.form-actions {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #8059ff;
+  box-shadow: 0 0 0 3px rgba(128, 89, 255, 0.25);
+  transition: 0.2s ease;
+}
+
+.header-actions {
+  display: flex;
+  gap: 20px; /* more breathing room */
+}
+
+.header-actions .btn {
+  padding: 10px 18px;
+  font-size: 0.95rem;
+}
